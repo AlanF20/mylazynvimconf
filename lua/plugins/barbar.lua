@@ -45,6 +45,11 @@ return {
           deleted = { enabled = true, icon = '-' },
         },
       },
+			name_formatter = function(buf)  -- Cambia el nombre de la pestaña
+        local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
+    		local parent = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":h:t")
+    		return parent .. "/" .. bufname
+      end,
     }
   end
 }

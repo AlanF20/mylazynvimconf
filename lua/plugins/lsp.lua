@@ -8,22 +8,24 @@ return {
     {'hrsh7th/cmp-nvim-lsp'},
     {'L3MON4D3/LuaSnip'},
     {'rafamadriz/friendly-snippets'},
-		{'Issafalcon/lsp-overloads.nvim'}
+    {'Issafalcon/lsp-overloads.nvim'},
+    {'lukas-reineke/lsp-format.nvim'},  -- Agregar lsp-format.nvim
+    {'https://git.sr.ht/~whynothugo/lsp_lines.nvim'}  -- Agregar lsp_lines.nvim
   },
   config = function()
     local lsp_zero = require('lsp-zero')
     lsp_zero.on_attach(function(client, bufnr)
       lsp_zero.default_keymaps({buffer = bufnr})
-			if client.server_capabilities then
-				print("Server capabilities detected for " .. client.name)
-				if client.server_capabilities.signatureHelpProvider then
-					print("Signature help available for " .. client.name)
-					require('lsp-overloads').setup(client, {})
-				end
-			else
-				print("Warning: server_capabilities is nil for " .. client.name)
-			end
-         end)
+      if client.server_capabilities then
+        print("Server capabilities detected for " .. client.name)
+        if client.server_capabilities.signatureHelpProvider then
+          print("Signature help available for " .. client.name)
+          require('lsp-overloads').setup(client, {})
+        end
+      else
+        print("Warning: server_capabilities is nil for " .. client.name)
+      end
+    end)
 
     require('mason').setup({})
     require('mason-lspconfig').setup({
@@ -51,6 +53,27 @@ return {
         "vue",
       },
     }
+
+    -- Configurar lsp_lines
+    require("lsp_lines").setup()
+
+    -- Activar lsp_lines
+    vim.diagnostic.config({
+      virtual_text = true,
+			virtual_lines = false
+		})
+
+    -- Configurar lsp-format
+    require("lsp-format").setup {}
+
+    -- Configurar gopls con lsp-format
+    require('lspconfig').gopls.setup {
+      on_attach = function(client, bufnr)
+        require("lsp-format").on_attach(client, bufnr)
+        lsp_zero.on_attach(client, bufnr)
+      end
+    }
   end,
 }
+
 
