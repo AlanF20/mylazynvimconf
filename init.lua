@@ -35,4 +35,4 @@ vim.keymap.set('n', 'f', function()
   vim.cmd(':w')
 end, { noremap = true, silent = true })
 -- Aplica el esquema de colores
-vim.cmd("colorscheme onedarkpro")
+vim.cmd("colorscheme onedark")

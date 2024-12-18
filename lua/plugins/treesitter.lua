@@ -4,9 +4,9 @@ return {
   config = function()
     require('nvim-treesitter.configs').setup {
       -- Lista de parsers a instalar
-      ensure_installed = { 
-        "c", "lua", "vim", "vimdoc", "query", 
-        "javascript", "rust", "vue", "typescript" 
+      ensure_installed = {
+        "c", "lua", "vim", "vimdoc", "query",
+        "javascript", "rust", "vue", "typescript"
       },
 
       -- Instala parsers de forma síncrona
