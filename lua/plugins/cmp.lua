@@ -9,7 +9,7 @@ return {
 		'hrsh7th/vim-vsnip',
 		'windwp/nvim-autopairs',
 		'L3MON4D3/LuaSnip',
-		'onsails/lspkind.nvim', -- Asegúrate de incluir lspkind como dependencia
+		'onsails/lspkind.nvim',
 	},
 	event = 'InsertEnter',
 	config = function()
@@ -17,7 +17,56 @@ return {
 		local cmp = require('cmp')
 		local lspkind = require('lspkind')
 
+		lspkind.init({
+			mode = 'symbol',
+			preset = 'default',
+			symbol_map = {
+				Text = ' ',
+				Method = ' ',
+				Function = ' ',
+				Constructor = ' ',
+				Field = ' ',
+				Variable = ' ',
+				Class = ' ',
+				Interface = ' ',
+				Module = ' ',
+				Property = ' ',
+				Unit = ' ',
+				Value = ' ',
+				Enum = ' ',
+				Keyword = ' ',
+				Snippet = ' ',
+				Color = ' ',
+				File = ' ',
+				Reference = ' ',
+				Folder = ' ',
+				EnumMember = ' ',
+				Constant = ' ',
+				Struct = ' ',
+				Event = ' ',
+				Operator = ' ',
+				TypeParameter = ' ',
+			}
+		})
+
+		local function truncate_text(text, max_length)
+			if #text > max_length then
+				return text:sub(1, max_length) .. '...'
+			else
+				return text
+			end
+		end
+
 		cmp.setup({
+			formatting = {
+				fields = { 'kind', 'abbr' },
+				format = function(entry, vim_item)
+					local max_length = 20 -- Ajusta la longitud máxima según tus necesidades
+					vim_item.abbr = truncate_text(vim_item.abbr, max_length)
+					vim_item.kind = lspkind.symbol_map[vim_item.kind] or ''
+					return vim_item
+				end,
+			},
 			mapping = {
 				['<Tab>'] = cmp.mapping.confirm({ select = true }),
 				['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -41,16 +90,18 @@ return {
 			},
 			sources = cmp.config.sources({
 				{ name = 'nvim_lsp' },
+				{ name = 'buffer' },
+				{ name = 'path' },
+				{ name = 'vsnip' },
 			}),
-			formatting = {
-				format = lspkind.cmp_format({
-					mode = 'symbol_text',
-					maxwidth = 50,
-					ellipsis_char = '...',
-				}),
-			},
 			window = {
-				completion = cmp.config.window.bordered(),
+				completion = {
+					border = 'rounded',
+					winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+					col_offset = -3,
+					side_padding = 0,
+					max_height = 5, -- Ajusta la altura máxima del menú
+				},
 				documentation = cmp.config.window.bordered(),
 			},
 			snippet = {
