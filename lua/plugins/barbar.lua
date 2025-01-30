@@ -1,56 +1,44 @@
 return {
-  'romgrk/barbar.nvim',
-  dependencies = {
-    'nvim-tree/nvim-web-devicons', -- Opcional, para los íconos
-    'lewis6991/gitsigns.nvim', -- Opcional, para mostrar cambios git
-  },
-  config = function()
-    local map = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-
-    -- Navegación entre buffers
-    map('n', '<Tab>', '<Cmd>BufferNext<CR>', opts)
-    map('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', opts)
-
-    -- Reordenar buffers
-    map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-    map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
-
-    -- Ir a una posición específica de buffer
-    for i = 1, 9 do
-      map('n', string.format('<leader>%d', i), string.format('<Cmd>BufferGoto %d<CR>', i), opts)
-    end
-
-    -- Cerrar buffer actual
-    map('n', '<C-w>', '<Cmd>bd<CR>', opts)
-
-    -- Configuración de Barbar
-    require('barbar').setup {
-      animation = true,
-      tabpages = true,
-      clickable = true,
-      icons = {
-        buffer_index = false,
-        buffer_number = false,
-        button = '',
-        diagnostics = {
-          [vim.diagnostic.severity.ERROR] = { enabled = true, icon = 'ﬀ' },
-          [vim.diagnostic.severity.WARN] = { enabled = true },
-          [vim.diagnostic.severity.INFO] = { enabled = false },
-          [vim.diagnostic.severity.HINT] = { enabled = true },
-        },
-        gitsigns = {
-          added = { enabled = true, icon = '+' },
-          changed = { enabled = true, icon = '~' },
-          deleted = { enabled = true, icon = '-' },
-        },
-      },
-			name_formatter = function(buf)  -- Cambia el nombre de la pestaña
-        local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
-    		local parent = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":h:t")
-    		return parent .. "/" .. bufname
-      end,
-    }
-  end
+	'romgrk/barbar.nvim',
+	dependencies = {
+		"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+	},
+	init = function()
+		vim.g.barbar_auto_setup = false	
+	end,
+	opts = {
+		-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+		animation = true,
+		clickable = true,
+		focus_on_close = "left",
+		icons = {
+			buffer_index = false,
+			buffer_number = false,
+			button = '',
+			diagnostics = {
+				[vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
+				[vim.diagnostic.severity.WARN] = {enabled = false},
+				[vim.diagnostic.severity.INFO] = {enabled = false},
+				[vim.diagnostic.severity.HINT] = {enabled = true},
+			},
+			gitsigns = {
+				added = {enabled = true, icon = '+'},
+				changed = {enabled = true, icon = '~'},
+				deleted = {enabled = true, icon = '-'},
+			},
+		},
+	},
+	keys = {
+		{"<Tab>", "<cmd>BufferNext<cr>", desc = "Change tab"},
+		{"<C-w>", "<cmd>bd<cr>", desc = "Change tab"},
+		{"<leader>1", "<cmd>BufferGoto 1<cr>", desc = "Change index 1"},
+		{"<leader>2", "<cmd>BufferGoto 2<cr>", desc = "Change index 2"},
+		{"<leader>3", "<cmd>BufferGoto 3<cr>", desc = "Change index 3"},
+		{"<leader>4", "<cmd>BufferGoto 4<cr>", desc = "Change index 4"},
+		{"<leader>5", "<cmd>BufferGoto 5<cr>", desc = "Change index 5"},
+		{"<leader>6", "<cmd>BufferGoto 6<cr>", desc = "Change index 6"},
+		{"<leader>7", "<cmd>BufferGoto 7<cr>", desc = "Change index 7"},
+		{"<leader>8", "<cmd>BufferGoto 8<cr>", desc = "Change index 8"},
+		{"<leader>9", "<cmd>BufferGoto 9<cr>", desc = "Change index 9"}
+	}
 }
-

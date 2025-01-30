@@ -25,30 +25,17 @@ vim.keymap.set('i', '<C-Backspace>', function()
 	vim.cmd('db')
 end, { noremap = true })
 
--- Mapeo para abrir Neotree en una ventana flotante
+--- Mapeo para abrir Neotree en una ventana flotante
 vim.keymap.set('n', 't', function()
 	vim.cmd('Neotree float filesystem reveal')
 end, { noremap = true, silent = true })
 
 -- Guardar archivo con la tecla 'f' y formatear
 vim.keymap.set('n', 'f', function()
-	vim.cmd('LspZeroFormat')
 	vim.cmd(':w')
 end, { noremap = true, silent = true })
--- Duplicate keymaps
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<S-A-Up>', ':LineDuplicate -1<CR>', opts)
-vim.keymap.set('n', '<S-A-Down>', ':LineDuplicate +1<CR>', opts)
--- Normal mode commands move
-vim.keymap.set('n', '<A-Up>', ':MoveLine -1<CR>', opts)
-vim.keymap.set('n', '<A-Down>', ':MoveLine 1<CR>', opts)
-vim.keymap.set('n', '<A-S-Left>', ':MoveWord -1<CR>', opts)
-vim.keymap.set('n', '<A-S-Right>', ':MoveWord 1<CR>', opts)
-
--- Visual-mode commands
-vim.keymap.set('x', '<A-Up>', ':MoveBlock -1<CR>', opts)
-vim.keymap.set('x', '<A-Down>', ':MoveBlock 1<CR>', opts)
-vim.keymap.set('v', '<A-Left>', ':MoveHBlock -1<CR>', opts)
-vim.keymap.set('v', '<A-Right>', ':MoveHBlock 1<CR>', opts)
+vim.g.material_style = "darker"
 -- Aplica el esquema de colores
-vim.cmd("colorscheme onedark_vivid")
+vim.cmd("colorscheme material")
+
+

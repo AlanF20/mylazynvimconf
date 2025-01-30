@@ -5,8 +5,6 @@ return {
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-cmdline',
-		'hrsh7th/cmp-vsnip',
-		'hrsh7th/vim-vsnip',
 		'windwp/nvim-autopairs',
 		'L3MON4D3/LuaSnip',
 		'onsails/lspkind.nvim',
@@ -92,7 +90,7 @@ return {
 				{ name = 'nvim_lsp' },
 				{ name = 'buffer' },
 				{ name = 'path' },
-				{ name = 'vsnip' },
+				{ name = 'luasnip' },
 			}),
 			window = {
 				completion = {
@@ -111,7 +109,12 @@ return {
 			},
 			confirmation = { completeopt = 'menu,menuone,noinsert' }
 		})
-
+		cmp.setup.cmdline(':', {
+			sources = cmp.config.sources({
+				{ name = 'cmdline' }
+			})
+		})
+		require('nvim-autopairs').setup({})
 		cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 	end,
 }
