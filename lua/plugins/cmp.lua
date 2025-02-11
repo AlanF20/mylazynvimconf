@@ -93,13 +93,7 @@ return {
 				{ name = 'luasnip' },
 			}),
 			window = {
-				completion = {
-					border = 'rounded',
-					winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
-					col_offset = -3,
-					side_padding = 0,
-					max_height = 5, -- Ajusta la altura máxima del menú
-				},
+				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
 			snippet = {

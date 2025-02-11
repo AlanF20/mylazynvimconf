@@ -3,7 +3,6 @@ return {
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
     --{"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
     {
@@ -92,7 +91,7 @@ return {
           highlight = "NeoTreeModified",
         },
         name = {
-          trailing_slash = false,
+          trailing_slash = true,
           use_git_status_colors = true,
           highlight = "NeoTreeFileName",
         },

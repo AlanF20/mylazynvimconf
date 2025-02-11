@@ -36,6 +36,6 @@ vim.keymap.set('n', 'f', function()
 end, { noremap = true, silent = true })
 vim.g.material_style = "darker"
 -- Aplica el esquema de colores
-vim.cmd("colorscheme material")
+vim.cmd("colorscheme onedark_vivid")
 
 

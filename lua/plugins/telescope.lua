@@ -4,5 +4,5 @@ return {
 	keys = {
 		{"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Search in files"},
 		{"<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Find by prompt"}
-	}	
+	}
 }

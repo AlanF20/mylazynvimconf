@@ -1,8 +1,7 @@
 return {
     'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
-         local dashboard = require("alpha.themes.dashboard")  
+         local dashboard = require("alpha.themes.dashboard")
 				 -- Configurar el header
 				 dashboard.section.header.val = {
 					 [[ █████╗ ██╗      █████╗ ███╗   ██╗   ██████╗ ███████╗██╗   ██╗]],
