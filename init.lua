@@ -25,17 +25,6 @@ vim.keymap.set('i', '<C-Backspace>', function()
 	vim.cmd('db')
 end, { noremap = true })
 
---- Mapeo para abrir Neotree en una ventana flotante
-vim.keymap.set('n', 't', function()
-	vim.cmd('Neotree float filesystem reveal')
-end, { noremap = true, silent = true })
-
--- Guardar archivo con la tecla 'f' y formatear
-vim.keymap.set('n', 'f', function()
-	vim.cmd(':w')
-end, { noremap = true, silent = true })
 vim.g.material_style = "darker"
 -- Aplica el esquema de colores
 vim.cmd("colorscheme onedark_vivid")
-
-
