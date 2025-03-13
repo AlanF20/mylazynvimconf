@@ -1,0 +1,25 @@
+return {
+	'akinsho/bufferline.nvim',
+	version = "*",
+	dependencies = 'DaikyXendo/nvim-web-devicons',
+	opts = function()
+		local buff = require('bufferline')
+		buff.setup {
+			options = {
+				diagnostics = "nvim_lsp" | "coc",
+				diagnostics_indicator = function(count, level, diagnostics_dict, context)
+					local s = " "
+					for e, n in pairs(diagnostics_dict) do
+						local sym = e == "error" and " "
+								or (e == "warning" and " " or " ")
+						s = s .. n .. sym
+					end
+					return s
+				end
+			}
+		}
+	end,
+	keys = {
+		{ "<Tab>", "<cmd>BufferLineCycleNext<cr>", "Next tab" }
+	}
+}
