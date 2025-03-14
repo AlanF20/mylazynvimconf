@@ -6,7 +6,7 @@ return {
 		local buff = require('bufferline')
 		buff.setup {
 			options = {
-				diagnostics = "nvim_lsp" | "coc",
+				diagnostics = "nvim_lsp",
 				diagnostics_indicator = function(count, level, diagnostics_dict, context)
 					local s = " "
 					for e, n in pairs(diagnostics_dict) do
