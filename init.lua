@@ -24,7 +24,6 @@ vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true })
 vim.keymap.set('i', '<C-Backspace>', function()
 	vim.cmd('db')
 end, { noremap = true })
-
-vim.g.material_style = "darker"
--- Aplica el esquema de colores
-vim.cmd("colorscheme onedark_vivid")
+vim.o.mousemoveevent = true
+-- Set colorscheme after options
+vim.cmd('colorscheme onenord')
