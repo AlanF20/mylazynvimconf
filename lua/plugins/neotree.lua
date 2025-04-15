@@ -25,7 +25,7 @@ return {
 		},
 	},
 	opts = {
-		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
 		enable_git_status = true,
 		enable_diagnostics = true,
@@ -335,6 +335,6 @@ return {
 		},
 	},
 	keys = {
-		{ "T", "<cmd>Neotree toggle reveal_force_cwd source=filesystem<cr>", desc = "Toggle NeoTree (Left) y resaltar archivo actual" }
+		{ "t", "<cmd>Neotree toggle reveal_force_cwd source=filesystem<cr>", desc = "Toggle NeoTree (Left) y resaltar archivo actual" }
 	},
 }
