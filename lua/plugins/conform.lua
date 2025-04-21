@@ -1,16 +1,21 @@
 return {
-	'stevearc/conform.nvim',
+	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
-	cmd = "ConformInfo",
+	cmd = { "ConformInfo" },
 	keys = {
 		{
+			-- Customize or remove this keymap to your liking
 			"<C-S-F>",
 			function()
-				require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
-			end
-		}
+				require("conform").format({ async = true })
+			end,
+			mode = "",
+			desc = "Format buffer",
+		},
 	},
-	mode = { "n", "v" },
+	-- This will provide type hinting with LuaLS
+	---@module "conform"
+	---@type conform.setupOpts
 	opts = {
 		-- Define your formatters
 		formatters_by_ft = {
