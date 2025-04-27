@@ -14,6 +14,7 @@ return {
 		local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 		local cmp = require('cmp')
 		local lspkind = require('lspkind')
+		local tailwind_formatter = require('tailwindcss-colorizer-cmp').formatter
 
 		lspkind.init({
 			mode = 'symbol',
@@ -44,6 +45,7 @@ return {
 				Event = ' ',
 				Operator = ' ',
 				TypeParameter = ' ',
+				Supermaven = "",
 			}
 		})
 
@@ -59,9 +61,17 @@ return {
 			formatting = {
 				fields = { 'kind', 'abbr' },
 				format = function(entry, vim_item)
-					local max_length = 20 -- Ajusta la longitud máxima según tus necesidades
-					vim_item.abbr = truncate_text(vim_item.abbr, max_length)
+					-- 1. Aplicar lspkind
 					vim_item.kind = lspkind.symbol_map[vim_item.kind] or ''
+
+					-- 2. Truncar texto (opcional, si todavía lo quieres)
+					local max_length = 20 -- Ajusta la longitud máxima
+					vim_item.abbr = truncate_text(vim_item.abbr, max_length)
+
+					-- 3. Aplicar el formateador de tailwindcss-colorizer-cmp
+					--    Lo llamamos DESPUÉS de modificar kind y abbr
+					vim_item = tailwind_formatter(entry, vim_item)
+
 					return vim_item
 				end,
 			},
@@ -108,6 +118,9 @@ return {
 				{ name = 'cmdline' }
 			})
 		})
+		cmp.config.formatting = {
+			format = require('tailwindcss-colorizer-cmp').formatter
+		}
 		require('nvim-autopairs').setup({})
 		cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 	end,
