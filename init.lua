@@ -16,7 +16,7 @@ vim.opt.swapfile = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 10
-
+vim.opt.termguicolors = true
 -- Mapas de teclas personalizados
 vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true })
 
